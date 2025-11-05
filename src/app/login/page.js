@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { signIn, useSession } from "next-auth/react"
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   Box,
   Button,
@@ -19,14 +19,23 @@ export default function LoginPage() {
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const { status } = useSession();
-  const params = useSearchParams();
-  const callbackUrl = params.get("callbackUrl") || "/"; // lấy từ query hoặc fallback /
+  
+  // State để lưu callbackUrl
+  const [callbackUrl, setCallbackUrl] = useState("/");
 
   useEffect(() => {
+    // Chỉ khi component đã mount và query đã có sẵn trên client
+    if (router.query?.callbackUrl) {
+      setCallbackUrl(router.query.callbackUrl);
+    }
+  }, [router.query]);  // Khi query thay đổi, cập nhật callbackUrl
+
+  useEffect(() => {
+    // Điều hướng nếu đã xác thực
     if (status === 'authenticated') {
       router.push(callbackUrl);
     }
-  }, [status]);
+  }, [status, callbackUrl]);
 
   const handleLogin = async (e) => {
     e.preventDefault()
