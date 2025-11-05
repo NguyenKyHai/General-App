@@ -1,3 +1,4 @@
+'use client';
 import FloatingFlowers from '@/components/FloatingFlowers';
 import { Box } from '@mui/material';
 
@@ -14,7 +15,6 @@ export default function DashboardPage() {
           justifyContent: 'flex-start', // Canh nội dung từ trên xuống
         }}
       >
-        <FloatingFlowers />
         <h2 className="text-3xl text-green-500 py-5 font-bold">📈 Đây là trang tổng quan dashboard</h2>
       </Box>
 

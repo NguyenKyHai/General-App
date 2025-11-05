@@ -1,4 +1,5 @@
-// src/app/system/layout.js
+'use client'
+
 import Header from './header';
 import Footer from './footer';
 

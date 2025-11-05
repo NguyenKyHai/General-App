@@ -22,7 +22,7 @@ export default function FloatingFlowers() {
   `;
 
   useEffect(() => {
-    const flowerCount = 75;
+    const flowerCount = 50;
     const flowerEmojis = ['🌸', '🌺', '🌹'];
 
     for (let i = 0; i < flowerCount; i++) {

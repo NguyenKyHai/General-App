@@ -1,8 +1,11 @@
+'use client';
 import { Box, Typography, Button, Stack } from '@mui/material';
+import { useSession } from 'next-auth/react'
 import Link from 'next/link';
 import FloatingFlowers from '@/components/FloatingFlowers';
 
 export default function HomePage() {
+  const { data: session } = useSession();
   return (
     <Box
       sx={{
@@ -42,11 +45,13 @@ export default function HomePage() {
         </Typography>
 
         <Stack direction="row" spacing={2} justifyContent="center">
-          <Link href="/dashboard" passHref>
-            <Button variant="contained" color="primary" size="large" sx={{ minWidth: 200 }}>
-              Dashboard
-            </Button>
-          </Link>
+          {session?.user?.role === "Admin" &&
+            <Link href="/dashboard" passHref>
+              <Button variant="contained" color="primary" size="large" sx={{ minWidth: 200 }}>
+                Dashboard
+              </Button>
+            </Link>
+          }
           <Link href="/system" passHref>
             <Button variant="outlined" color="secondary" size="large" sx={{ minWidth: 200 }}>
               System

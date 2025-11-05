@@ -1,5 +1,3 @@
-// src/app/system/posts/[id]/page.js
-
 'use client';  // Đảm bảo đây là một Client Component
 
 import { useRouter } from 'next/navigation';

@@ -45,7 +45,7 @@ const PostList = () => {
               <p className="mt-2 text-gray-600">{post.excerpt}</p>
             </CardContent>
             <CardActions className="flex justify-end p-4">
-              <Link href={`/posts/${post.id}`}>
+              <Link href={`/system/posts/${post.id}`}>
                 <Button size="small" color="primary">
                   Read more
                 </Button>

@@ -1,3 +1,4 @@
+'use client'
 // src/app/page.js
 import PostList from '@/components/PostList';
 

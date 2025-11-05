@@ -27,7 +27,7 @@ export default function NotFound() {
         Có thể đường dẫn đã bị thay đổi hoặc không tồn tại.
       </Typography>
 
-      <Link href="/" passHref>
+      <Link href="/system" passHref>
         <Button variant="contained" color="primary">
           🔙 Quay về trang chủ
         </Button>
