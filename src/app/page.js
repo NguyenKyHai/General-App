@@ -47,13 +47,13 @@ export default function HomePage() {
         <Stack direction="row" spacing={2} justifyContent="center">
           {session?.user?.role === "Admin" &&
             <Link href="/dashboard" passHref>
-              <Button variant="contained" color="primary" size="large" sx={{ minWidth: 200 }}>
+              <Button variant="contained" color="primary" size="large" sx={{ minWidth: 180 }}>
                 Dashboard
               </Button>
             </Link>
           }
           <Link href="/system" passHref>
-            <Button variant="outlined" color="secondary" size="large" sx={{ minWidth: 200 }}>
+            <Button variant="outlined" color="secondary" size="large" sx={{ minWidth: 180 }}>
               System
             </Button>
           </Link>

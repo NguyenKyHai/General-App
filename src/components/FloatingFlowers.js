@@ -23,7 +23,8 @@ export default function FloatingFlowers() {
 
   useEffect(() => {
     const flowerCount = 50;
-    const flowerEmojis = ['🌸', '🌺', '🌹'];
+    //const flowerEmojis = ['🌸', '🌺', '🌹'];
+    const flowerEmojis = ['💖', '💕', '🥰'];
 
     for (let i = 0; i < flowerCount; i++) {
       const delay = Math.random() * 3000; // delay 0-3s

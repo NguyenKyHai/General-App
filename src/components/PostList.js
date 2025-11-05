@@ -1,21 +1,32 @@
 'use client'
-// src/app/components/PostList.js
 import { useState } from 'react';
-import { Card, CardContent, CardActions, Button } from '@mui/material';
+import { Card, CardContent, CardActions, Button, CardMedia } from '@mui/material';
 import Link from 'next/link';
 import Paginate from './Pagination';
+import FloatingFlowers from '@/components/FloatingFlowers';
 
 const postsData = [
-  { id: 1, title: 'Blog Post Title 1', excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  { id: 2, title: 'Blog Post Title 2', excerpt: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.' },
-  { id: 3, title: 'Blog Post Title 3', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 4, title: 'Blog Post Title 4', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 5, title: 'Blog Post Title 5', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 6, title: 'Blog Post Title 6', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 7, title: 'Blog Post Title 7', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 8, title: 'Blog Post Title 8', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 9, title: 'Blog Post Title 9', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' },
-  { id: 10, title: 'Blog Post Title 10', excerpt: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.' }
+  {
+    id: 1,
+    title: 'Time line - Dòng thời gian',
+    excerpt: 'Dòng thời gian những kỉ niệm quan trọng',
+    image: 'https://img.freepik.com/premium-vector/valentines-day-couple-characters_1318093-14552.jpg',
+    link: '/system/timeline'
+  },
+  {
+    id: 2,
+    title: 'Photo',
+    excerpt: 'Nơi chứa những hình ảnh đáng iu',
+    image: 'https://img.freepik.com/free-vector/hand-drawn-couples-collection_23-2149005805.jpg',
+    link: '/system/photo'
+  },
+  {
+    id: 3,
+    title: 'Phạt',
+    excerpt: 'Nơi chứa những hình phạt siu dễ thương',
+    image: 'https://img.freepik.com/free-vector/cute-boy-cheek-pinching-his-girlfriend-happy-valentine-cartoon-character-illustration_56104-367.jpg',
+    link: '/system/punishment'
+  },
 ];
 
 const PostList = () => {
@@ -36,25 +47,41 @@ const PostList = () => {
     <div className="mt-8">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {currentPosts.map((post) => (
-          <Card
+          <Link
             key={post.id}
-            className="w-full h-96 flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300"
+            href={post.link}
+            className="hover:scale-105 transition-transform duration-300"
           >
-            <CardContent className="flex-grow">
-              <h2 className="text-2xl font-semibold">{post.title}</h2>
-              <p className="mt-2 text-gray-600">{post.excerpt}</p>
-            </CardContent>
-            <CardActions className="flex justify-end p-4">
-              <Link href={`/system/posts/${post.id}`}>
+            <Card className="w-full h-full flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer">
+              {/* Hình ảnh */}
+              <CardMedia
+                component="div"
+                className="h-full w-full overflow-hidden"
+              >
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  className="w-full h-full object-cover"
+                />
+              </CardMedia>
+
+              {/* Nội dung */}
+              <CardContent className="flex-grow">
+                <h2 className="text-2xl font-semibold">{post.title}</h2>
+                <p className="mt-2 text-gray-600">{post.excerpt}</p>
+              </CardContent>
+
+              {/* Nút (chỉ để trang trí thêm) */}
+              <CardActions className="flex justify-end p-4">
                 <Button size="small" color="primary">
-                  Read more
+                  Xem
                 </Button>
-              </Link>
-            </CardActions>
-          </Card>
+              </CardActions>
+            </Card>
+          </Link>
         ))}
       </div>
-
+      <FloatingFlowers />
       {/* Phân trang */}
       <Paginate page={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
     </div>
