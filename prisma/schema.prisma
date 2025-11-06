@@ -17,3 +17,28 @@ model User {
 
     @@map("users")
 }
+
+model Post {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  date        DateTime
+  content     Content[]
+  insertedDate DateTime @default(now()) // Ngày tạo bản ghi
+  updatedDate DateTime @updatedAt      // Ngày cập nhật bản ghi
+
+  @@map("post")
+}
+
+model Content {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  type      String
+  content   String?  // Có thể là null nếu là hình ảnh hoặc quote
+  src       String?  // Để lưu trữ src của ảnh
+  alt       String?  // Để lưu trữ alt text của ảnh
+  postId    String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  insertedDate DateTime @default(now()) // Ngày tạo bản ghi
+  updatedDate DateTime @updatedAt      // Ngày cập nhật bản ghi
+
+  @@map("content")
+}

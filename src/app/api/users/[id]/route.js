@@ -2,26 +2,27 @@ import { prisma } from "@/lib/prisma";
 import { getServerSession } from "next-auth";
 import { hash } from "bcryptjs";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { NextResponse } from "next/server"; // Import NextResponse
 
 export async function GET(req, { params }) {
   const session = await getServerSession(authOptions);
-  if (!session) return new Response(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
+  if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
-  const { id } = params;
+  const { id } = await params;
 
   const user = await prisma.user.findUnique({
     where: { id },
     select: { id: true, name: true, username: true },
   });
 
-  if (!user) return new Response(JSON.stringify({ message: "User not found" }), { status: 404 });
+  if (!user) return NextResponse.json({ message: "User not found" }, { status: 404 });
 
-  return new Response(JSON.stringify(user), { status: 200 });
+  return NextResponse.json(user, { status: 200 });
 }
 
 export async function PUT(req, { params }) {
   const session = await getServerSession(authOptions);
-  if (!session) return new Response(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
+  if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
   const { id } = params;
   const { name, username, password } = await req.json();
@@ -35,22 +36,22 @@ export async function PUT(req, { params }) {
       data,
       select: { id: true, name: true, username: true },
     });
-    return new Response(JSON.stringify(user), { status: 200 });
+    return NextResponse.json(user, { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({ message: "Update failed or duplicate" }), { status: 400 });
+    return NextResponse.json({ message: "Update failed or duplicate" }, { status: 400 });
   }
 }
 
 export async function DELETE(req, { params }) {
   const session = await getServerSession(authOptions);
-  if (!session) return new Response(JSON.stringify({ message: "Unauthorized" }), { status: 401 });
+  if (!session) return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
 
   const { id } = params;
 
   try {
     await prisma.user.delete({ where: { id } });
-    return new Response(JSON.stringify({ message: "User deleted" }), { status: 200 });
+    return NextResponse.json({ message: "User deleted" }, { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({ message: "Delete failed" }), { status: 400 });
+    return NextResponse.json({ message: "Delete failed" }, { status: 400 });
   }
 }
