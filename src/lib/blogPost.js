@@ -1,33 +1,29 @@
 // data/blogPost.js
 const blogPost = {
-  title: "Khám Phá Next.js và Tailwind CSS",
-  date: "2025-11-10",
+  title: "Hình phạt vui vẻ và đáng iu",
+  date: "2025-11-08",
   content: [
     {
       type: "text",
-      content: "Trong bài viết này, chúng ta sẽ cùng tìm hiểu về cách Next.js và Tailwind CSS có thể kết hợp với nhau để tạo ra các ứng dụng web mạnh mẽ và dễ dàng tùy chỉnh."
+      content: "Có cô em bé nhỏ xíu mà hay thách thức mạnh miệng lắm nè. 🌸"
     },
     {
       type: "image",
-      src: "/images/nextjs-tailwind-1.png",
-      alt: "Next.js và Tailwind CSS"
+      src: "https://img.freepik.com/free-vector/lovers-couple-sending-heart-happy-valentine-cartoon-character-illustration_56104-395.jpg",
+      alt: "Free Vector cute girl kissing her boyfriend, happy valentine, cartoon character illustration"
     },
     {
       type: "text",
-      content: "Next.js là một framework React giúp bạn xây dựng các ứng dụng web với các tính năng mạnh mẽ như SSR (Server-Side Rendering) và SSG (Static Site Generation). Tailwind CSS là một framework CSS tiện lợi giúp tạo giao diện nhanh chóng mà không cần phải viết quá nhiều mã CSS."
+      content: "Hay dị chứ là ẻm sợ lắm ý, lần này ẻm bị phạt 5 cái rùi. Hí hí, phải cho ẻm bít được sự lợi hại của anh ngiu mới được. 🥰"
     },
     {
       type: "image",
-      src: "/images/nextjs-tailwind-2.png",
-      alt: "Tích hợp Tailwind CSS vào Next.js"
-    },
-    {
-      type: "text",
-      content: "Việc sử dụng Tailwind CSS với Next.js giúp bạn dễ dàng tạo giao diện đẹp mắt và dễ dàng cấu hình mà không mất quá nhiều thời gian."
+      src: "https://img.freepik.com/free-vector/romance-couple-kissing-love-relationship-hand-drawn-cartoon-art-illustration_56104-1092.jpg",
+      alt: "TFree Vector cute girl kissing her boyfriend, happy valentine, cartoon character illustration"
     },
     {
       type: "quote",
-      content: "Kết hợp Next.js và Tailwind CSS giúp việc phát triển ứng dụng nhanh chóng và hiệu quả hơn."
+      content: "Em bé có ngoan hay lì thì anh ngiu cũng cưng hết nè 💖"
     }
   ]
 };

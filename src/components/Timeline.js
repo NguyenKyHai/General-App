@@ -1,10 +1,10 @@
 // components/Timeline.js
 const events = [
-  { id: 1, date: "2025-01-01", title: "Sự kiện 1", description: "Mô tả sự kiện 1" },
-  { id: 2, date: "2025-02-15", title: "Sự kiện 2", description: "Mô tả sự kiện 2" },
-  { id: 3, date: "2025-03-20", title: "Sự kiện 3", description: "Mô tả sự kiện 3" },
-  { id: 4, date: "2025-04-25", title: "Sự kiện 4", description: "Mô tả sự kiện 4" },
-  { id: 5, date: "2025-05-25", title: "Sự kiện 5", description: "Mô tả sự kiện 5" },
+  { id: 1, date: "2025-07-08", title: "Tìm thấy nhau 🥰", description: "Ngày mà hai người tìm thấy nhau" },
+  { id: 2, date: "2025-08-09", title: "Hai người gặp mặt nhau", description: "Một buổi hẹn gặp sau nhiều ngày trò chuyện" },
+  { id: 3, date: "2025-09-07", title: "Tỏ tình 💖", description: "Call nhau tới khuya luôn, xong cái tỏ tình luôn 💕" },
+  { id: 4, date: "2025-09-21", title: "Buổi đi chơi đầu tiên", description: "Hai người đi chơi với nhau sau khi chính thức là ngiu" },
+  { id: 5, date: "2025-10-18", title: "Buổi đi chơi tiếp theo", description: "Lần này hai người thân nhau nhiều hơn nè, hun em ngiu đã lun" },
 ];
 
 export default function Timeline() {

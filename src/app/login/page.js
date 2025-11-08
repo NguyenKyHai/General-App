@@ -21,7 +21,7 @@ export default function LoginPage() {
   const { status } = useSession();
   
   // State để lưu callbackUrl
-  const [callbackUrl, setCallbackUrl] = useState("/");
+  const [callbackUrl, setCallbackUrl] = useState("/system");
 
   useEffect(() => {
     // Chỉ khi component đã mount và query đã có sẵn trên client

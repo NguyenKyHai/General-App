@@ -6,7 +6,7 @@ import { useReactToPrint } from "react-to-print";
 import { usePathname } from "next/navigation";
 import PrintIcon from "@mui/icons-material/Print";
 import RefreshIcon from "@mui/icons-material/Refresh";
-import { generatePrintDate } from "@/lib/utils";
+import { generatePrintDate } from "@/utils/utils";
 
 export default function Layout({ children }) {
     const contentRef = useRef(null);
