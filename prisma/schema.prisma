@@ -1,44 +1,60 @@
 // prisma/schema.prisma
 datasource db {
-    provider = "mongodb"
-    url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 model User {
-    id       String @id @default(auto()) @map("_id") @db.ObjectId
-    name     String @unique
-    username String @unique
-    password String
-    role String
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  name         String   @unique
+  username     String   @unique
+  password     String
+  role         String
+  insertedDate DateTime? @default(now()) // Ngày tạo media
+  updatedDate  DateTime? @updatedAt // Ngày cập nhật media
 
-    @@map("users")
+  @@map("users")
 }
 
 model Post {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  title       String
-  date        DateTime
-  content     Content[]
-  insertedDate DateTime @default(now()) // Ngày tạo bản ghi
-  updatedDate DateTime @updatedAt      // Ngày cập nhật bản ghi
+  id           String    @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  date         DateTime
+  content      Content[] // Một bài viết có nhiều nội dung
+  insertedDate DateTime  @default(now()) // Ngày tạo bản ghi
+  updatedDate  DateTime  @updatedAt // Ngày cập nhật bản ghi
 
   @@map("post")
 }
 
 model Content {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  type      String
-  content   String?  // Có thể là null nếu là hình ảnh hoặc quote
-  src       String?  // Để lưu trữ src của ảnh
-  alt       String?  // Để lưu trữ alt text của ảnh
-  postId    String   @db.ObjectId
-  post      Post     @relation(fields: [postId], references: [id])
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  type         String // Kiểu content, ví dụ "text" hoặc "image"
+  content      String? // Nội dung của phần này, nếu là văn bản
+  media        Media[] // Danh sách các hình ảnh, mỗi hình ảnh có ghi chú riêng
+  postId       String   @db.ObjectId
+  post         Post     @relation(fields: [postId], references: [id])
   insertedDate DateTime @default(now()) // Ngày tạo bản ghi
-  updatedDate DateTime @updatedAt      // Ngày cập nhật bản ghi
+  updatedDate  DateTime @updatedAt // Ngày cập nhật bản ghi
 
   @@map("content")
+}
+
+model Media {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  src       String // Đường dẫn URL của media
+  alt       String? // Alt text (nếu là hình ảnh) hoặc mô tả chung
+  note      String? // Ghi chú cho media
+  type      String // Loại media: image, video, audio, file, v.v...
+  contentId String  @db.ObjectId // Liên kết đến Content chứa media này
+  content   Content @relation(fields: [contentId], references: [id])
+
+  insertedDate DateTime @default(now()) // Ngày tạo media
+  updatedDate  DateTime @updatedAt // Ngày cập nhật media
+
+  @@map("media")
 }

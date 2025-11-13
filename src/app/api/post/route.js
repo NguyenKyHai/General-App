@@ -1,71 +1,101 @@
-// src/app/api/post/route.js
+import { NextResponse } from 'next/server';
+import cloudinary from '@/lib/cloudinary';
 import { prisma } from "@/lib/prisma";
-import { NextResponse } from "next/server";
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
 export async function POST(req) {
   try {
-    // Dữ liệu bài viết được khởi tạo trực tiếp thay vì lấy từ req.json()
-    const blogPost = {
-      title: "Khám Phá Next.js và Tailwind CSS",
-      date: new Date("2025-11-10T00:00:00.000Z"),
-      insertedDate: new Date("2025-11-10T00:00:00.000Z"),
-      updatedDate: new Date("2025-11-10T00:00:00.000Z"),
-      content: [
-        {
-          type: "text",
-          content: "Trong bài viết này, chúng ta sẽ cùng tìm hiểu về cách Next.js và Tailwind CSS có thể kết hợp với nhau để tạo ra các ứng dụng web mạnh mẽ và dễ dàng tùy chỉnh."
-        },
-        {
-          type: "image",
-          src: "/images/nextjs-tailwind-1.png",
-          alt: "Next.js và Tailwind CSS"
-        },
-        {
-          type: "text",
-          content: "Next.js là một framework React giúp bạn xây dựng các ứng dụng web với các tính năng mạnh mẽ như SSR (Server-Side Rendering) và SSG (Static Site Generation). Tailwind CSS là một framework CSS tiện lợi giúp tạo giao diện nhanh chóng mà không cần phải viết quá nhiều mã CSS."
-        },
-        {
-          type: "image",
-          src: "/images/nextjs-tailwind-2.png",
-          alt: "Tích hợp Tailwind CSS vào Next.js"
-        },
-        {
-          type: "text",
-          content: "Việc sử dụng Tailwind CSS với Next.js giúp bạn dễ dàng tạo giao diện đẹp mắt và dễ dàng cấu hình mà không mất quá nhiều thời gian."
-        },
-        {
-          type: "quote",
-          content: "Kết hợp Next.js và Tailwind CSS giúp việc phát triển ứng dụng nhanh chóng và hiệu quả hơn."
-        }
-      ]
-    };
+    const formData = await req.formData();
 
-    // Tạo bài viết mới trong cơ sở dữ liệu
-    const createdPost = await prisma.post.create({
+    const title = formData.get('title');
+    const contentEntries = [];
+
+    // Kiểm tra title và date có hợp lệ không
+    if (!title) {
+      return NextResponse.json({ success: false, message: 'Thiếu tiêu đề hoặc ngày' }, { status: 400 });
+    }
+
+    // Lặp qua các phần nội dung
+    for (let i = 0; ; i++) {
+      const type = formData.get(`content[${i}][type]`);
+      if (!type) break;
+
+      if (type === 'text') {
+        const contentText = formData.get(`content[${i}][content]`);
+        contentEntries.push({
+          type: 'text',
+          content: contentText,
+        });
+      } else if (type === 'image') {
+        const mediaEntries = [];
+        const mediaCount = formData.getAll(`content[${i}][media][0][src]`).length;
+
+        // Xử lý từng media (hình ảnh)
+        for (let j = 0; j < mediaCount; j++) {
+          const file = formData.get(`content[${i}][media][${j}][src]`);
+          const alt = formData.get(`content[${i}][media][${j}][alt]`);
+          const note = formData.get(`content[${i}][media][${j}][note]`);
+
+          const arrayBuffer = await file.arrayBuffer();
+          const buffer = Buffer.from(arrayBuffer);
+
+          // Upload file lên Cloudinary
+          const result = await new Promise((resolve, reject) => {
+            cloudinary.uploader.upload_stream(
+              {
+                folder: 'blog_media',
+                resource_type: 'auto',
+              },
+              (err, result) => {
+                if (err) reject(err);
+                else resolve(result);
+              }
+            ).end(buffer);
+          });
+
+          // Lưu media vào mảng mediaEntries
+          mediaEntries.push({
+            src: result.secure_url,
+            alt,
+            note,
+            type: 'image',
+          });
+        }
+
+        // Lưu phần nội dung "image" vào contentEntries
+        contentEntries.push({
+          type: 'image',
+          content: mediaEntries.filter(Boolean), // Lưu danh sách media dưới dạng chuỗi JSON
+        });
+      }
+    }
+
+    // Tạo bài viết trong database
+    const post = await prisma.post.create({
       data: {
-        title: blogPost.title,
-        date: blogPost.date,
-        insertedDate: blogPost.insertedDate,
-        updatedDate: blogPost.updatedDate,
+        title,
+        date: new Date(),  // Tạo ngày giờ hiện tại
         content: {
-          create: blogPost.content.map((item) => ({
-            type: item.type,
-            content: item.content || null,
-            src: item.src || null,
-            alt: item.alt || null,
+          create: contentEntries.filter(Boolean).map((entry) => ({
+            type: entry.type,
+            content: entry.type === 'text' ? entry.content : null,  // Nếu là văn bản, lưu vào content
+            media: entry.type === 'image' ? {
+              create: entry.content.map((media) => ({
+                src: media.src,
+                alt: media.alt,
+                note: media.note,
+                type: media.type,
+              })),
+            } : undefined, // Nếu không phải hình ảnh thì không cần tạo media
           })),
         },
       },
     });
 
-    // Trả về phản hồi với status code 201 (Created) và dữ liệu bài viết vừa tạo
-    return NextResponse.json(createdPost, { status: 201 });
-  } catch (error) {
-    console.error("Error creating post:", error);
-    // Trả về phản hồi lỗi nếu có sự cố trong quá trình tạo bài viết
-    return NextResponse.json(
-      { error: "Đã có lỗi xảy ra khi tạo bài viết" },
-      { status: 500 }
-    );
+    return NextResponse.json({ success: true, post });
+  } catch (err) {
+    console.error('Lỗi xử lý POST:', err);
+    return NextResponse.json({ success: false, message: err.message }, { status: 500 });
   }
 }

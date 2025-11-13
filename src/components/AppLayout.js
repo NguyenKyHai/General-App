@@ -25,7 +25,7 @@ import {
   Menu as MenuIcon,
   ChevronLeft as ChevronLeftIcon,
   Print as PrintIcon,
-  Photo as PhotoIcon ,
+  LibraryBooks as PostIcon ,
   AccountCircle as UserIcon,
   Logout as LogoutIcon,
   Storage as SystemIcon,
@@ -46,7 +46,7 @@ const navItems = [
   { label: 'Users', icon: <UserIcon />, href: '/dashboard/users' },
   { label: 'Quét QR', icon: <QrIcon />, href: '/dashboard/qr' },
   { label: 'In', icon: <PrintIcon />, href: '/print' },
-  { label: 'Photo', icon: <PhotoIcon />, href: '/dashboard/photo' },
+  { label: 'Post', icon: <PostIcon />, href: '/dashboard/post' },
   { label: 'Cài đặt', icon: <SettingsIcon />, href: '/dashboard/settings' },
 ];
 

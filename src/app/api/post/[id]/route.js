@@ -19,7 +19,11 @@ export async function GET(req, { params }) {
     const post = await prisma.post.findUnique({
       where: { id },
       include: {
-        content: true,  // Bao gồm nội dung của bài viết
+        content: {
+          include: {
+            media: true,
+          },
+        },
       },
     });
 
