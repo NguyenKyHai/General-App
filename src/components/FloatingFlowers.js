@@ -22,9 +22,10 @@ export default function FloatingFlowers() {
   `;
 
   useEffect(() => {
-    const flowerCount = 50;
-    const flowerEmojis = ['🌸', '🌺', '🌹'];
-    //const flowerEmojis = ['💖', '💕', '🥰'];
+    const flowerCount = 36;
+    //const flowerEmojis = ['🌸', '🌺', '🌹'];
+    const flowerEmojis = ['💖', '💕', '🥰'];
+    const emoji = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
 
     for (let i = 0; i < flowerCount; i++) {
       const delay = Math.random() * 3000; // delay 0-3s
@@ -39,7 +40,7 @@ export default function FloatingFlowers() {
             left: Math.random() * 100,
             size: 20 + Math.random() * 24,
             duration: 5 + Math.random() * 2, // 5-7s
-            emoji: flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)],
+            emoji: emoji,
           }
         ]);
 

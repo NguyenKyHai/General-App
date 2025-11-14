@@ -88,13 +88,18 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Link href="/system/post" className="hover:text-gray-300" onClick={handleLinkClick}>
-                  Post
+                <Link href="/system/timeline" className="hover:text-gray-300" onClick={handleLinkClick}>
+                  Time line
                 </Link>
               </li>
               <li>
-                <Link href="/system/timeline" className="hover:text-gray-300" onClick={handleLinkClick}>
-                  Time line
+                <Link href="/system/photo" className="hover:text-gray-300" onClick={handleLinkClick}>
+                  Photo
+                </Link>
+              </li>
+              <li>
+                <Link href="/system/punishment" className="hover:text-gray-300" onClick={handleLinkClick}>
+                  Phạt
                 </Link>
               </li>
               <li>
