@@ -1,4 +1,4 @@
-import cloudinary from '@/utils/cloudinary';
+import cloudinary from '@/lib/cloudinary';
 import { NextResponse } from 'next/server';
 
 export async function GET(req) {

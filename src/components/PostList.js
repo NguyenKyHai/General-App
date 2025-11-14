@@ -8,24 +8,24 @@ import FloatingFlowers from '@/components/FloatingFlowers';
 const postsData = [
   {
     id: 1,
-    title: 'Time line - Dòng thời gian',
-    excerpt: 'Dòng thời gian những kỉ niệm quan trọng',
-    image: 'https://img.freepik.com/premium-vector/valentines-day-couple-characters_1318093-14552.jpg',
-    link: '/system/timeline'
+    // title: 'Time line - Dòng thời gian',
+    // excerpt: 'Dòng thời gian những kỉ niệm quan trọng',
+    // image: 'https://img.freepik.com/premium-vector/valentines-day-couple-characters_1318093-14552.jpg',
+     link: '/system/timeline'
   },
   {
     id: 2,
-    title: 'Photo',
-    excerpt: 'Nơi chứa những hình ảnh đáng iu',
-    image: 'https://img.freepik.com/free-vector/hand-drawn-couples-collection_23-2149005805.jpg',
-    link: '/system/photo'
+    // title: 'Photo',
+    // excerpt: 'Nơi chứa những hình ảnh đáng iu',
+    // image: 'https://img.freepik.com/free-vector/hand-drawn-couples-collection_23-2149005805.jpg',
+     link: '/system/photo'
   },
   {
     id: 3,
-    title: 'Phạt',
-    excerpt: 'Nơi chứa những hình phạt siu dễ thương',
-    image: 'https://img.freepik.com/free-vector/cute-boy-cheek-pinching-his-girlfriend-happy-valentine-cartoon-character-illustration_56104-367.jpg',
-    link: '/system/punishment'
+    // title: 'Phạt',
+    // excerpt: 'Nơi chứa những hình phạt siu dễ thương',
+    // image: 'https://img.freepik.com/free-vector/cute-boy-cheek-pinching-his-girlfriend-happy-valentine-cartoon-character-illustration_56104-367.jpg',
+     link: '/system/punishment'
   },
 ];
 
@@ -49,7 +49,7 @@ const PostList = () => {
         {currentPosts.map((post) => (
           <Link
             key={post.id}
-            href={post.link}
+            href={post?.link}
             className="hover:scale-105 transition-transform duration-300"
           >
             <Card className="w-full h-full flex flex-col shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer">
@@ -59,16 +59,16 @@ const PostList = () => {
                 className="h-full w-full overflow-hidden"
               >
                 <img
-                  src={post.image}
-                  alt={post.title}
+                  src={post?.image}
+                  alt={post?.title}
                   className="w-full h-full object-cover"
                 />
               </CardMedia>
 
               {/* Nội dung */}
               <CardContent className="flex-grow">
-                <h2 className="text-2xl font-semibold">{post.title}</h2>
-                <p className="mt-2 text-gray-600">{post.excerpt}</p>
+                <h2 className="text-2xl font-semibold">{post?.title}</h2>
+                <p className="mt-2 text-gray-600">{post?.excerpt}</p>
               </CardContent>
 
               {/* Nút (chỉ để trang trí thêm) */}
