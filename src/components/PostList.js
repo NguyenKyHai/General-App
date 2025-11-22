@@ -8,23 +8,23 @@ import FloatingFlowers from '@/components/FloatingFlowers';
 const postsData = [
   {
     id: 1,
-    // title: 'Time line - Dòng thời gian',
-    // excerpt: 'Dòng thời gian những kỉ niệm quan trọng',
-    // image: 'https://img.freepik.com/premium-vector/valentines-day-couple-characters_1318093-14552.jpg',
+    title: 'Time line - Dòng thời gian',
+    excerpt: 'Dòng thời gian những kỉ niệm quan trọng',
+    image: 'https://img.freepik.com/premium-vector/valentines-day-couple-characters_1318093-14552.jpg',
      link: '/system/timeline'
   },
   {
     id: 2,
-    // title: 'Photo',
-    // excerpt: 'Nơi chứa những hình ảnh đáng iu',
-    // image: 'https://img.freepik.com/free-vector/hand-drawn-couples-collection_23-2149005805.jpg',
+    title: 'Photo',
+    excerpt: 'Nơi chứa những hình ảnh đáng iu',
+    image: 'https://img.freepik.com/free-vector/hand-drawn-couples-collection_23-2149005805.jpg',
      link: '/system/photo'
   },
   {
     id: 3,
-    // title: 'Phạt',
-    // excerpt: 'Nơi chứa những hình phạt siu dễ thương',
-    // image: 'https://img.freepik.com/free-vector/cute-boy-cheek-pinching-his-girlfriend-happy-valentine-cartoon-character-illustration_56104-367.jpg',
+    title: 'Phạt',
+    excerpt: 'Nơi chứa những hình phạt siu dễ thương',
+    image: 'https://img.freepik.com/free-vector/cute-boy-cheek-pinching-his-girlfriend-happy-valentine-cartoon-character-illustration_56104-367.jpg',
      link: '/system/punishment'
   },
 ];

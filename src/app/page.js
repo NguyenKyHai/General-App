@@ -3,9 +3,25 @@ import { Box, Typography, Button, Stack } from '@mui/material';
 import { useSession } from 'next-auth/react'
 import Link from 'next/link';
 import FloatingFlowers from '@/components/FloatingFlowers';
+import { useRouter } from "next/navigation";
+import { useEffect } from 'react';
+import LoadingSpinner from '@/components/LoadingSpinner';
 
 export default function HomePage() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (status === "loading") return;
+    if (!session || session.user.role !== "Admin") {
+      router.push("/system");
+    }
+  }, [session, status, router]);
+
+  if (status === "loading") {
+    return <LoadingSpinner />
+  }
+
   return (
     <Box
       sx={{
