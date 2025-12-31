@@ -21,6 +21,8 @@ export default function Layout({ children }) {
         pageStyle: `
       @page { size: A4; margin: 10mm; }
       body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      * { page-break-inside: auto; }
+      h1, h2, h3, h4, h5, h6, p { page-break-after: avoid; }
     `,
     });
 

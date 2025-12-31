@@ -11,7 +11,7 @@ export default function PrintWrapper({ children }) {
         margin: 'auto',
         backgroundColor: '#fff',
         color: '#000',
-        p: '20mm',
+        p: '5mm',
         boxShadow: '0 0 5mm rgba(0,0,0,0.1)',
         fontFamily: 'Arial, sans-serif',
         '@media print': {

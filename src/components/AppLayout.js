@@ -44,8 +44,8 @@ const headerHeight = 64;
 const navItems = [
   { label: 'Tổng quan', icon: <DashboardIcon />, href: '/dashboard' },
   { label: 'Users', icon: <UserIcon />, href: '/dashboard/users' },
-  { label: 'Quét QR', icon: <QrIcon />, href: '/dashboard/qr' },
   { label: 'In', icon: <PrintIcon />, href: '/print' },
+  { label: 'Quét QR', icon: <QrIcon />, href: '/dashboard/qr' },
   { label: 'Post', icon: <PostIcon />, href: '/dashboard/post' },
   { label: 'Cài đặt', icon: <SettingsIcon />, href: '/dashboard/settings' },
 ];
